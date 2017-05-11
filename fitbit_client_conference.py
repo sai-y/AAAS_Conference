@@ -5,6 +5,7 @@
 
 import fitbit
 import datetime
+import time
 import configparser
 
 NUM_PLAYERS = 2
@@ -23,7 +24,7 @@ class VisualAid(object):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
-        self.refresh_token  = refresh_token
+        self.refresh_token = refresh_token
         
         self.client = fitbit.Fitbit(
             self.consumer_key,
@@ -109,4 +110,11 @@ if __name__ == "__main__":
             refresh_token=refresh_token
         ))
 
-        print(scoreboard[index].get_steps())
+    current_time = time.time()
+    for index in range(NUM_PLAYERS):
+        scoreboard[index].get_steps()
+    while True:
+        if (time.time() - current_time) > 900:
+            current_time = time.time()
+            for index in range(NUM_PLAYERS):
+                scoreboard[index].get_steps()
