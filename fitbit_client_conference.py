@@ -109,4 +109,4 @@ if __name__ == "__main__":
             refresh_token=refresh_token
         ))
 
-        print(scoreboard[index]).get_steps()
+        print(scoreboard[index].get_steps())
