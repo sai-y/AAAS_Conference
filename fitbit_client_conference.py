@@ -97,10 +97,10 @@ if __name__ == "__main__":
         players.append("PLAYER_" + str(index + 1))
     
     for index in range(NUM_PLAYERS):
-        consumer_key = config.get(player[index], "CONSUMER_KEY")
-        consumer_secret = config.get(player[index], "CONSUMER_SECRET")
-        refresh_token = config.get(player[index], "REFRESH_TOKEN")
-        access_token = config.get(player[index], "ACCESS_TOKEN")
+        consumer_key = config.get(players[index], "CONSUMER_KEY")
+        consumer_secret = config.get(players[index], "CONSUMER_SECRET")
+        refresh_token = config.get(players[index], "REFRESH_TOKEN")
+        access_token = config.get(players[index], "ACCESS_TOKEN")
         scoreboard.append(VisualAid(
             player[index],
             consumer_key,
