@@ -104,7 +104,7 @@ if __name__ == "__main__":
         scoreboard.append(VisualAid(
             players[index],
             consumer_key,
-            consumer_token,
+            consumer_secret,
             access_token=access_token,
             refresh_token=refresh_token
         ))
