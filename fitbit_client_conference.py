@@ -84,8 +84,8 @@ class VisualAid(object):
         return response['goals']['steps']
 
 if __name__ == "__main__":
-    scoreboard = []
-    players = []
+    scoreboard = list()
+    players = list()
     
     # config is loaded from config file
     # alternatively you may store them as constants in your program
@@ -94,21 +94,19 @@ if __name__ == "__main__":
     config.read(CONFIG_FILE)
 
     for index in range(NUM_PLAYERS):
-        players[index] = "NUMBER_" + str(index + 1) 
+        players.append("PLAYER_" + str(index + 1))
     
     for index in range(NUM_PLAYERS):
         consumer_key = config.get(player[index], "CONSUMER_KEY")
         consumer_secret = config.get(player[index], "CONSUMER_SECRET")
         refresh_token = config.get(player[index], "REFRESH_TOKEN")
         access_token = config.get(player[index], "ACCESS_TOKEN")
-        scoreboard[index] = VisualAid(
+        scoreboard.append(VisualAid(
             player[index],
             consumer_key,
             consumer_token,
             access_token=access_token,
             refresh_token=refresh_token
-        )
+        ))
 
         print(scoreboard[index]).get_steps()
-
-
