@@ -102,7 +102,7 @@ if __name__ == "__main__":
         refresh_token = config.get(players[index], "REFRESH_TOKEN")
         access_token = config.get(players[index], "ACCESS_TOKEN")
         scoreboard.append(VisualAid(
-            player[index],
+            players[index],
             consumer_key,
             consumer_token,
             access_token=access_token,
