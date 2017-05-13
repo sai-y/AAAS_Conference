@@ -117,9 +117,15 @@ if __name__ == "__main__":
         ))
 
     current_time = time.time()
+
     for index in range(NUM_PLAYERS):
-        print(scoreboard[index].profile())
-        scoreboard[index].get_steps()
+        print(
+            "{0}:{1}".format(
+                scoreboard[index].display_name(),
+                scoreboard[index].get_steps()
+            )
+        )
+
     while True:
         if (time.time() - current_time) > 900:
             current_time = time.time()
