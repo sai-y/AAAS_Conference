@@ -88,7 +88,8 @@ class VisualAid(object):
         """
         Returns user profile
         """
-        return self.client.user_profile_get()
+        response = self.client.user_profile_get()
+        return response['user']['displayName']
 
 if __name__ == "__main__":
     scoreboard = list()
