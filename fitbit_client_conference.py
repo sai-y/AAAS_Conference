@@ -64,7 +64,6 @@ class VisualAid(object):
             print(error)
         else:
             str_steps = response['activities-steps'][0]['value']
-            print(str_steps)
             try:
                 num_steps = int(str_steps)
             except ValueError:
@@ -84,9 +83,9 @@ class VisualAid(object):
         
         return response['goals']['steps']
 
-    def profile(self):
+    def display_name(self):
         """
-        Returns user profile
+        Returns user's name to be displayed on the screen
         """
         response = self.client.user_profile_get()
         return response['user']['displayName']
@@ -125,4 +124,9 @@ if __name__ == "__main__":
         if (time.time() - current_time) > 900:
             current_time = time.time()
             for index in range(NUM_PLAYERS):
-                scoreboard[index].get_steps()
+                print(
+                    "{0}:{1}".format(
+                        scoreboard[index].display_name(),
+                        scoreboard[index].get_steps()
+                    )
+                )
