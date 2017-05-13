@@ -84,6 +84,12 @@ class VisualAid(object):
         
         return response['goals']['steps']
 
+    def profile(self):
+        """
+        Returns user profile
+        """
+        return self.client.user_profile_get()
+
 if __name__ == "__main__":
     scoreboard = list()
     players = list()
@@ -112,7 +118,7 @@ if __name__ == "__main__":
 
     current_time = time.time()
     for index in range(NUM_PLAYERS):
-        print(scoreboard[index].user_profile_get())
+        print(scoreboard[index].profile())
         scoreboard[index].get_steps()
     while True:
         if (time.time() - current_time) > 900:
