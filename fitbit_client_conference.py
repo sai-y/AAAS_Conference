@@ -13,7 +13,7 @@ NUM_PLAYERS = 2
 
 class VisualAid(object):
     """
-    A wrapper around the Fitbit API and different functions. 
+    A wrapper around the Fitbit API and different functions.
     """
 
     def __init__(
@@ -25,12 +25,12 @@ class VisualAid(object):
         self.consumer_secret = consumer_secret
         self.access_token = access_token
         self.refresh_token = refresh_token
-        
+
         self.client = fitbit.Fitbit(
             self.consumer_key,
             self.consumer_secret,
             access_token=self.access_token,
-            refresh_token=self.refresh_token, 
+            refresh_token=self.refresh_token,
             refresh_cb=self.update_tokens)
         self.goal = self.get_goal()
 
@@ -80,20 +80,26 @@ class VisualAid(object):
             response = self.client.activities_daily_goal()
         except Exception as error:
             print(error)
-        
+
         return response['goals']['steps']
 
     def display_name(self):
         """
         Returns user's name to be displayed on the screen
         """
-        response = self.client.user_profile_get()
-        return response['user']['displayName']
+        try:
+            response = self.client.user_profile_get()
+        except Exception as error:
+            print(error)
+
+        display_name = response['user']['displayName']
+        return display_name
 
 if __name__ == "__main__":
     scoreboard = list()
     players = list()
-    
+    names = list()
+
     # config is loaded from config file
     # alternatively you may store them as constants in your program
     CONFIG_FILE = '/home/pi/score_board.ini'
@@ -102,7 +108,7 @@ if __name__ == "__main__":
 
     for index in range(NUM_PLAYERS):
         players.append("PLAYER_" + str(index + 1))
-    
+
     for index in range(NUM_PLAYERS):
         consumer_key = config.get(players[index], "CONSUMER_KEY")
         consumer_secret = config.get(players[index], "CONSUMER_SECRET")
@@ -119,9 +125,12 @@ if __name__ == "__main__":
     current_time = time.time()
 
     for index in range(NUM_PLAYERS):
+        names.append(scoreboard[index].display_name())
+
+    for index in range(NUM_PLAYERS):
         print(
             "{0}:{1}".format(
-                scoreboard[index].display_name(),
+                name[index],
                 scoreboard[index].get_steps()
             )
         )
@@ -132,7 +141,7 @@ if __name__ == "__main__":
             for index in range(NUM_PLAYERS):
                 print(
                     "{0}:{1}".format(
-                        scoreboard[index].display_name(),
+                        name[index],
                         scoreboard[index].get_steps()
                     )
                 )
