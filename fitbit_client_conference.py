@@ -87,6 +87,7 @@ class VisualAid(object):
         """
         Returns user's name to be displayed on the screen
         """
+        display_name = ""
         try:
             response = self.client.user_profile_get()
         except Exception as error:
@@ -130,7 +131,7 @@ if __name__ == "__main__":
     for index in range(NUM_PLAYERS):
         print(
             "{0}:{1}".format(
-                name[index],
+                names[index],
                 scoreboard[index].get_steps()
             )
         )
@@ -141,7 +142,7 @@ if __name__ == "__main__":
             for index in range(NUM_PLAYERS):
                 print(
                     "{0}:{1}".format(
-                        name[index],
+                        names[index],
                         scoreboard[index].get_steps()
                     )
                 )
