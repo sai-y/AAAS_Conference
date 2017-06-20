@@ -7,6 +7,8 @@ import fitbit
 import datetime
 import time
 import configparser
+from Adafruit_LED_Backpack import SevenSegment
+
 
 NUM_PLAYERS = 2
 
@@ -33,6 +35,8 @@ class VisualAid(object):
             refresh_token=self.refresh_token,
             refresh_cb=self.update_tokens)
         self.goal = self.get_goal()
+        segment = SevenSegment.SevenSegment(address=0x70)
+        segment.begin()
 
     def update_tokens(self, token):
         """
