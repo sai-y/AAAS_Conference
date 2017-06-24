@@ -35,8 +35,6 @@ class VisualAid(object):
             refresh_token=self.refresh_token,
             refresh_cb=self.update_tokens)
         self.goal = self.get_goal()
-        segment = SevenSegment.SevenSegment(address=0x70)
-        segment.begin()
 
     def update_tokens(self, token):
         """
@@ -54,7 +52,7 @@ class VisualAid(object):
         """
             Return the steps logged
         """
-        num_steps = 0
+        num_steps = 0        
         now = datetime.datetime.now()
         end_time = now.strftime("%H:%M")
         try:
@@ -104,6 +102,8 @@ if __name__ == "__main__":
     scoreboard = list()
     players = list()
     names = list()
+    segment = SevenSegment.SevenSegment(address=0x70)
+    segment.begin()
 
     # config is loaded from config file
     # alternatively you may store them as constants in your program
@@ -133,20 +133,16 @@ if __name__ == "__main__":
         names.append(scoreboard[index].display_name())
 
     for index in range(NUM_PLAYERS):
-        print(
-            "{0}:{1}".format(
-                names[index],
-                scoreboard[index].get_steps()
-            )
-        )
+        player = names[index]
+        steps = scoreboard[index]
+        print("{0}:{1}".format(player, steps))
+        segment.clear()
+        segment.print_number_str(str(steps % 10000))
 
     while True:
         if (time.time() - current_time) > 900:
             current_time = time.time()
             for index in range(NUM_PLAYERS):
-                print(
-                    "{0}:{1}".format(
-                        names[index],
-                        scoreboard[index].get_steps()
-                    )
-                )
+                player = names[index]
+                steps = scoreboard[index]
+                print("{0}:{1}".format(player, steps))
