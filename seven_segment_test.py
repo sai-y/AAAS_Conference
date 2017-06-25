@@ -137,6 +137,7 @@ if __name__ == "__main__":
         print("{0}:{1}".format(names[index], steps))
         segment.clear()
         segment.print_number_str(str(steps % 10000))
+        segment.write_display()
 
     while True:
         if (time.time() - current_time) > 900:
