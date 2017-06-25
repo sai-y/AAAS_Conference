@@ -133,8 +133,8 @@ if __name__ == "__main__":
         names.append(scoreboard[index].display_name())
 
     for index in range(NUM_PLAYERS):
-        player = names[index]
-        steps = scoreboard[index]
+        player = names[index].display_name()
+        steps = scoreboard[index].get_steps()
         print("{0}:{1}".format(player, steps))
         segment.clear()
         segment.print_number_str(str(steps % 10000))
