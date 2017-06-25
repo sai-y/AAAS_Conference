@@ -133,9 +133,8 @@ if __name__ == "__main__":
         names.append(scoreboard[index].display_name())
 
     for index in range(NUM_PLAYERS):
-        player = names[index].display_name()
         steps = scoreboard[index].get_steps()
-        print("{0}:{1}".format(player, steps))
+        print("{0}:{1}".format(names[index], steps))
         segment.clear()
         segment.print_number_str(str(steps % 10000))
 
@@ -143,6 +142,5 @@ if __name__ == "__main__":
         if (time.time() - current_time) > 900:
             current_time = time.time()
             for index in range(NUM_PLAYERS):
-                player = names[index]
-                steps = scoreboard[index]
-                print("{0}:{1}".format(player, steps))
+                steps = scoreboard[index].get_steps()
+                print("{0}:{1}".format(name[index], steps))
