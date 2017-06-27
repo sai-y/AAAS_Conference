@@ -138,6 +138,7 @@ if __name__ == "__main__":
         segment.clear()
         segment.print_number_str(str(steps % 10000))
         segment.write_display()
+        time.sleep(5)
 
     while True:
         if (time.time() - current_time) > 900:
