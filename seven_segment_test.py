@@ -45,7 +45,7 @@ class VisualAid(object):
 
     def update_display(self, steps):
         self.display_1.clear()
-        self.print_number_str(str(steps % 10000))
+        self.display_1.print_number_str(str(steps % 10000))
         self.display_1.write_display()
 
         self.display_2.clear()
