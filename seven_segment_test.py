@@ -51,7 +51,7 @@ class VisualAid(object):
         self.display_2.clear()
         if int(steps / 10000):
             self.display_2.print_number_str(str(steps / 10000))
-            self.display_2.write_display()
+        self.display_2.write_display()
 
     def update_tokens(self, token):
         """
