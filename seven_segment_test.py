@@ -142,8 +142,8 @@ if __name__ == "__main__":
             consumer_secret,
             access_token=access_token,
             refresh_token=refresh_token,
-            address_1=address_1,
-            address_2=address_2
+            address_1=int(address_1, 16),
+            address_2=int(address_2, 16)
         ))
 
         
