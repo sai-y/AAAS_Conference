@@ -10,7 +10,7 @@ import configparser
 from Adafruit_LED_Backpack import SevenSegment
 
 
-NUM_PLAYERS = 2
+NUM_PLAYERS = 1
 
 
 class VisualAid(object):
@@ -20,13 +20,15 @@ class VisualAid(object):
 
     def __init__(
         self, player, consumer_key, consumer_secret,
-        access_token, refresh_token
+        access_token, refresh_token, address_1, address_2
     ):
         self.player = player
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
         self.refresh_token = refresh_token
+        self.display_1 = self.init_display(address_1)
+        self.display_2 = self.init_display(address_2)
 
         self.client = fitbit.Fitbit(
             self.consumer_key,
@@ -35,6 +37,21 @@ class VisualAid(object):
             refresh_token=self.refresh_token,
             refresh_cb=self.update_tokens)
         self.goal = self.get_goal()
+
+    def init_display(self, address):
+        display = SevenSegment.SevenSegment(address=address)
+        display.begin()
+        return display
+
+    def update_display(self, steps):
+        self.display_1.clear()
+        self.print_number_str(str(steps % 10000))
+        self.display_1.write_display()
+
+        self.display_2.clear()
+        if int(steps / 10000):
+            self.display_2.print_number_str(str(steps / 10000))
+            self.display_2.write_display()
 
     def update_tokens(self, token):
         """
@@ -102,8 +119,6 @@ if __name__ == "__main__":
     scoreboard = list()
     players = list()
     names = list()
-    segment = SevenSegment.SevenSegment(address=0x70)
-    segment.begin()
 
     # config is loaded from config file
     # alternatively you may store them as constants in your program
@@ -127,6 +142,8 @@ if __name__ == "__main__":
             refresh_token=refresh_token
         ))
 
+        
+
     current_time = time.time()
 
     for index in range(NUM_PLAYERS):
@@ -135,10 +152,6 @@ if __name__ == "__main__":
     for index in range(NUM_PLAYERS):
         steps = scoreboard[index].get_steps()
         print("{0}:{1}".format(names[index], steps))
-        segment.clear()
-        segment.print_number_str(str(steps % 10000))
-        segment.write_display()
-        time.sleep(5)
 
     while True:
         if (time.time() - current_time) > 900:
