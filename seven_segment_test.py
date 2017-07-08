@@ -134,12 +134,16 @@ if __name__ == "__main__":
         consumer_secret = config.get(players[index], "CONSUMER_SECRET")
         refresh_token = config.get(players[index], "REFRESH_TOKEN")
         access_token = config.get(players[index], "ACCESS_TOKEN")
+        address_1 = config.get(players[index], "DISPLAY_1")
+        address_2 = config.get(players[index], "DISPLAY_2")
         scoreboard.append(VisualAid(
             players[index],
             consumer_key,
             consumer_secret,
             access_token=access_token,
-            refresh_token=refresh_token
+            refresh_token=refresh_token,
+            address_1=address_1,
+            address_2=address_2
         ))
 
         
