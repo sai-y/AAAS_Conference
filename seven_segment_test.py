@@ -156,6 +156,7 @@ if __name__ == "__main__":
     for index in range(NUM_PLAYERS):
         steps = scoreboard[index].get_steps()
         print("{0}:{1}".format(names[index], steps))
+        scoreboard[index].update_display(steps)
 
     while True:
         if (time.time() - current_time) > 900:
@@ -163,3 +164,4 @@ if __name__ == "__main__":
             for index in range(NUM_PLAYERS):
                 steps = scoreboard[index].get_steps()
                 print("{0}:{1}".format(name[index], steps))
+                scoreboard[index].update_display(steps)
