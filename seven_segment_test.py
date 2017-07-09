@@ -9,8 +9,7 @@ import time
 import configparser
 from Adafruit_LED_Backpack import SevenSegment
 
-
-NUM_PLAYERS = 1
+NUM_PLAYERS = 2
 
 
 class VisualAid(object):
