@@ -162,5 +162,5 @@ if __name__ == "__main__":
             current_time = time.time()
             for index in range(NUM_PLAYERS):
                 steps = scoreboard[index].get_steps()
-                print("{0}:{1}".format(name[index], steps))
+                print("{0}:{1}".format(names[index], steps))
                 scoreboard[index].update_display(steps)
