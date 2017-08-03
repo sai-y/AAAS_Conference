@@ -38,7 +38,7 @@ class VisualAid(object):
         self.goal = self.get_goal()
 
     def init_display(self, bus):
-        display = SevenSegment.SevenSegment(address=0x77, bus=bus)
+        display = SevenSegment.SevenSegment(address=0x77, busnum=bus)
         display.begin()
         return display
 
