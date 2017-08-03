@@ -164,3 +164,4 @@ if __name__ == "__main__":
                 steps = scoreboard[index].get_steps()
                 print("{0}:{1}".format(names[index], steps))
                 scoreboard[index].update_display(steps)
+        time.sleep(10)
