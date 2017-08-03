@@ -19,15 +19,15 @@ class VisualAid(object):
 
     def __init__(
         self, player, consumer_key, consumer_secret,
-        access_token, refresh_token, address_1, address_2
+        access_token, refresh_token, bus_1, bus_2
     ):
         self.player = player
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
         self.access_token = access_token
         self.refresh_token = refresh_token
-        self.display_1 = self.init_display(address_1)
-        self.display_2 = self.init_display(address_2)
+        self.display_1 = self.init_display(bus_1)
+        self.display_2 = self.init_display(bus_2)
 
         self.client = fitbit.Fitbit(
             self.consumer_key,
@@ -37,8 +37,8 @@ class VisualAid(object):
             refresh_cb=self.update_tokens)
         self.goal = self.get_goal()
 
-    def init_display(self, address):
-        display = SevenSegment.SevenSegment(address=address)
+    def init_display(self, bus):
+        display = SevenSegment.SevenSegment(address=0x77, bus=bus)
         display.begin()
         return display
 
@@ -133,16 +133,16 @@ if __name__ == "__main__":
         consumer_secret = config.get(players[index], "CONSUMER_SECRET")
         refresh_token = config.get(players[index], "REFRESH_TOKEN")
         access_token = config.get(players[index], "ACCESS_TOKEN")
-        address_1 = config.get(players[index], "DISPLAY_1")
-        address_2 = config.get(players[index], "DISPLAY_2")
+        bus_1 = config.get(players[index], "DISPLAY_1")
+        bus_2 = config.get(players[index], "DISPLAY_2")
         scoreboard.append(VisualAid(
             players[index],
             consumer_key,
             consumer_secret,
             access_token=access_token,
             refresh_token=refresh_token,
-            address_1=int(address_1, 16),
-            address_2=int(address_2, 16)
+            bus_1=int(bus_1, 10),
+            bus_2=int(bus_2, 10)
         ))
 
         
